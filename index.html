@@ -15,7 +15,6 @@
         }
         .container { width:90%; max-width:1200px; margin:0 auto; padding:20px 0; }
 
-        /* 导航 */
         header {
             background: #5d3a1a;
             color: #f5ede4;
@@ -55,7 +54,6 @@
             color: #f5ede4;
         }
 
-        /* Banner */
         .banner {
             background: linear-gradient(135deg, #7b5a3b, #3e2c1b);
             color: #f5ede4;
@@ -77,7 +75,6 @@
         }
         .btn:hover { background: #c4a074; transform:scale(1.02); }
 
-        /* 标题 */
         .section-title {
             text-align: center;
             font-size: 28px;
@@ -93,7 +90,6 @@
             margin:8px auto 0;
         }
 
-        /* 书籍卡片 - 图片版 */
         .book-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
@@ -126,11 +122,8 @@
             padding:2px 14px; border-radius:20px; font-size:13px;
         }
         .book-card .status.sold { background:#fce4e4; color:#b22222; }
-        .book-card .desc {
-            margin-top:6px; font-size:13px; color:#7f6b5a;
-        }
+        .book-card .desc { margin-top:6px; font-size:13px; color:#7f6b5a; }
 
-        /* 关于 */
         .about-text {
             background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.06);
             max-width:700px; margin:0 auto; font-size:16px;
@@ -138,7 +131,6 @@
         .about-text i { color:#5d3a1a; margin-right:6px; }
         .about-text p { margin:10px 0; }
 
-        /* 联系 */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -165,7 +157,6 @@
             text-align:center; padding:16px 0; margin-top:30px;
         }
 
-        /* 响应式 */
         @media (max-width:768px) {
             .nav-menu {
                 display:none;
@@ -204,7 +195,6 @@
     </div>
 </header>
 
-<!-- Banner -->
 <section id="home" class="banner">
     <div class="container">
         <h1><i class="fas fa-book"></i> 让知识循环</h1>
@@ -213,7 +203,6 @@
     </div>
 </section>
 
-<!-- 书库 -->
 <section id="books" class="books">
     <div class="container">
         <h2 class="section-title">📖 在售好书</h2>
@@ -221,7 +210,6 @@
     </div>
 </section>
 
-<!-- 关于 -->
 <section id="about" class="about">
     <div class="container">
         <h2 class="section-title">📚 关于书香</h2>
@@ -232,7 +220,6 @@
     </div>
 </section>
 
-<!-- 联系 -->
 <section id="contact" class="contact">
     <div class="container">
         <h2 class="section-title">📬 联系我们</h2>
@@ -262,7 +249,7 @@
 </footer>
 
 <script>
-    // ----- 书籍数据（含图片） -----
+    // ----- 书籍数据（使用你上传的图片） -----
     let books = [
         {
             id: 1,
@@ -271,7 +258,7 @@
             price: 45,
             status: '在售',
             desc: '第三版，几乎全新',
-            cover: 'images/book1.jpg'   // 👈 图片路径
+            cover: 'book1.jpg'
         },
         {
             id: 2,
@@ -280,7 +267,7 @@
             price: 28,
             status: '在售',
             desc: '经典文学',
-            cover: 'images/book2.jpg'
+            cover: 'book2.jpg'
         },
         {
             id: 3,
@@ -289,7 +276,7 @@
             price: 60,
             status: '已售',
             desc: '原版影印',
-            cover: 'images/book3.jpg'
+            cover: 'book3.jpg'
         }
     ];
 
@@ -300,10 +287,8 @@
             const card = document.createElement('div');
             card.className = 'book-card';
             const statusClass = book.status === '已售' ? 'sold' : '';
-            // 如果图片加载失败，显示备用的书本图标
-            const imgError = `this.onerror=null; this.src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📚</text></svg>'`;
             card.innerHTML = `
-                <img class="cover" src="${book.cover}" alt="${book.title}" onerror="${imgError}">
+                <img class="cover" src="${book.cover}" alt="${book.title}">
                 <div class="book-info">
                     <h3>${book.title}</h3>
                     <p class="author">${book.author}</p>
@@ -317,7 +302,6 @@
     }
     renderBooks();
 
-    // 移动端菜单
     document.querySelector('.menu-toggle').addEventListener('click', function() {
         document.querySelector('.nav-menu').classList.toggle('active');
     });
@@ -327,7 +311,6 @@
         });
     });
 
-    // 平滑滚动
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -336,7 +319,6 @@
         });
     });
 
-    // 联系表单
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
         alert('留言已发送！');
