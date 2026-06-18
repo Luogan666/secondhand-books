@@ -93,31 +93,42 @@
             margin:8px auto 0;
         }
 
-        /* 书籍卡片 */
+        /* 书籍卡片 - 图片版 */
         .book-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
             gap: 25px;
         }
         .book-card {
             background: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            padding: 18px;
-            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
             transition: 0.3s;
+            text-align: center;
+            padding-bottom: 16px;
         }
-        .book-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
-        .book-cover { font-size: 56px; color:#5d3a1a; margin-bottom:6px; }
-        .book-card h3 { font-size:18px; margin:6px 0; }
+        .book-card:hover { transform:translateY(-5px); box-shadow:0 8px 25px rgba(0,0,0,0.12); }
+        .book-card .cover {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            background: #e8e0d8;
+        }
+        .book-card .book-info { padding: 12px 14px; }
+        .book-card h3 { font-size:17px; margin:4px 0; }
         .book-card .author { color:#7f6b5a; font-style:italic; font-size:14px; }
         .book-card .price { font-size:20px; color:#b22222; font-weight:bold; margin:4px 0; }
         .book-card .status {
             display:inline-block;
             background:#e8f0e8; color:#2d6a4f;
-            padding:2px 12px; border-radius:20px; font-size:13px;
+            padding:2px 14px; border-radius:20px; font-size:13px;
         }
         .book-card .status.sold { background:#fce4e4; color:#b22222; }
+        .book-card .desc {
+            margin-top:6px; font-size:13px; color:#7f6b5a;
+        }
 
         /* 关于 */
         .about-text {
@@ -169,6 +180,10 @@
             .menu-toggle { display:block; }
             .contact-grid { grid-template-columns:1fr; }
             .banner h1 { font-size:32px; }
+            .book-card .cover { height:180px; }
+        }
+        @media (max-width:480px) {
+            .book-card .cover { height:150px; }
         }
     </style>
 </head>
@@ -247,11 +262,35 @@
 </footer>
 
 <script>
-    // 书籍数据
+    // ----- 书籍数据（含图片） -----
     let books = [
-        { id: 1, title: '深入理解计算机系统', author: 'Randal E. Bryant', price: 45, status: '在售', desc: '第三版，几乎全新' },
-        { id: 2, title: '百年孤独', author: '马尔克斯', price: 28, status: '在售', desc: '经典文学' },
-        { id: 3, title: '算法导论', author: 'Cormen', price: 60, status: '已售', desc: '原版影印' },
+        {
+            id: 1,
+            title: '深入理解计算机系统',
+            author: 'Randal E. Bryant',
+            price: 45,
+            status: '在售',
+            desc: '第三版，几乎全新',
+            cover: 'images/book1.jpg'   // 👈 图片路径
+        },
+        {
+            id: 2,
+            title: '百年孤独',
+            author: '马尔克斯',
+            price: 28,
+            status: '在售',
+            desc: '经典文学',
+            cover: 'images/book2.jpg'
+        },
+        {
+            id: 3,
+            title: '算法导论',
+            author: 'Cormen',
+            price: 60,
+            status: '已售',
+            desc: '原版影印',
+            cover: 'images/book3.jpg'
+        }
     ];
 
     function renderBooks() {
@@ -261,13 +300,17 @@
             const card = document.createElement('div');
             card.className = 'book-card';
             const statusClass = book.status === '已售' ? 'sold' : '';
+            // 如果图片加载失败，显示备用的书本图标
+            const imgError = `this.onerror=null; this.src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📚</text></svg>'`;
             card.innerHTML = `
-                <div class="book-cover">${book.status === '已售' ? '📕' : '📘'}</div>
-                <h3>${book.title}</h3>
-                <p class="author">${book.author}</p>
-                <p class="price">¥${book.price}</p>
-                <span class="status ${statusClass}">${book.status}</span>
-                <p style="margin-top:8px; font-size:13px; color:#7f6b5a;">${book.desc}</p>
+                <img class="cover" src="${book.cover}" alt="${book.title}" onerror="${imgError}">
+                <div class="book-info">
+                    <h3>${book.title}</h3>
+                    <p class="author">${book.author}</p>
+                    <p class="price">¥${book.price}</p>
+                    <span class="status ${statusClass}">${book.status}</span>
+                    <p class="desc">${book.desc}</p>
+                </div>
             `;
             grid.appendChild(card);
         });
