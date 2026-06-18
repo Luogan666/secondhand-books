@@ -3,37 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>书香二手书 - 让知识循环</title>
-    <!-- Font Awesome 图标库 -->
+    <title>书香二手书</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== 全局样式 ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'Georgia', '微软雅黑', serif;
             color: #3e2c1b;
             background: #faf6f0;
             line-height: 1.6;
         }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
+        .container { width:90%; max-width:1200px; margin:0 auto; padding:20px 0; }
 
-        /* ===== 导航栏 ===== */
+        /* 导航 */
         header {
             background: #5d3a1a;
             color: #f5ede4;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             position: sticky;
-            top: 0;
-            z-index: 1000;
+            top:0; z-index:1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         header .container {
             display: flex;
@@ -42,31 +30,24 @@
             padding: 12px 0;
         }
         .logo a {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
             color: #f5ede4;
             text-decoration: none;
         }
-        .logo i {
-            margin-right: 8px;
-            color: #d4b48c;
-        }
+        .logo i { margin-right:8px; color:#d4b48c; }
         .nav-menu {
             list-style: none;
             display: flex;
         }
-        .nav-menu li {
-            margin-left: 30px;
-        }
+        .nav-menu li { margin-left: 30px; }
         .nav-menu a {
             text-decoration: none;
             color: #f5ede4;
             font-weight: 500;
             transition: color 0.3s;
         }
-        .nav-menu a:hover {
-            color: #d4b48c;
-        }
+        .nav-menu a:hover { color: #d4b48c; }
         .menu-toggle {
             display: none;
             font-size: 24px;
@@ -74,323 +55,184 @@
             color: #f5ede4;
         }
 
-        /* ===== Banner ===== */
+        /* Banner */
         .banner {
             background: linear-gradient(135deg, #7b5a3b, #3e2c1b);
             color: #f5ede4;
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
         }
-        .banner h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        .banner h1 i {
-            color: #d4b48c;
-        }
-        .banner p {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
+        .banner h1 { font-size: 40px; margin-bottom: 10px; }
+        .banner h1 i { color: #d4b48c; }
+        .banner p { font-size: 18px; margin-bottom: 20px; }
         .btn {
             display: inline-block;
             background: #d4b48c;
             color: #3e2c1b;
-            padding: 12px 30px;
+            padding: 10px 28px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
         }
-        .btn:hover {
-            background: #c4a074;
-            transform: scale(1.02);
-        }
+        .btn:hover { background: #c4a074; transform:scale(1.02); }
 
-        /* ===== 公共标题 ===== */
+        /* 标题 */
         .section-title {
             text-align: center;
-            font-size: 32px;
-            margin-bottom: 40px;
+            font-size: 28px;
+            margin-bottom: 30px;
             color: #5d3a1a;
-            position: relative;
         }
         .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #d4b48c;
-            margin: 10px auto 0;
+            content:'';
+            display:block;
+            width:50px;
+            height:3px;
+            background:#d4b48c;
+            margin:8px auto 0;
         }
 
-        /* ===== 书籍列表 ===== */
+        /* 书籍卡片 */
         .book-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+            gap: 25px;
         }
         .book-card {
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .book-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        .book-cover {
-            font-size: 64px;
-            color: #5d3a1a;
-            margin-bottom: 10px;
-        }
-        .book-card h3 {
-            font-size: 20px;
-            margin: 10px 0 5px;
-        }
-        .book-card .author {
-            color: #7f6b5a;
-            font-style: italic;
-        }
-        .book-card .price {
-            font-size: 22px;
-            color: #b22222;
-            font-weight: bold;
-            margin: 8px 0;
-        }
-        .book-card .status {
-            display: inline-block;
-            background: #e8f0e8;
-            color: #2d6a4f;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        .book-card .status.sold {
-            background: #fce4e4;
-            color: #b22222;
-        }
-
-        /* ===== 发布表单 ===== */
-        .publish-form {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 700px;
-            margin: 0 auto;
+            border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
-        .publish-form input,
-        .publish-form textarea,
-        .publish-form select {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 18px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            font-family: inherit;
-        }
-        .publish-form button {
-            background: #5d3a1a;
-            color: #fff;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 30px;
-            font-size: 18px;
-            cursor: pointer;
+            padding: 18px;
+            text-align: center;
             transition: 0.3s;
         }
-        .publish-form button:hover {
-            background: #3e2c1b;
+        .book-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+        .book-cover { font-size: 56px; color:#5d3a1a; margin-bottom:6px; }
+        .book-card h3 { font-size:18px; margin:6px 0; }
+        .book-card .author { color:#7f6b5a; font-style:italic; font-size:14px; }
+        .book-card .price { font-size:20px; color:#b22222; font-weight:bold; margin:4px 0; }
+        .book-card .status {
+            display:inline-block;
+            background:#e8f0e8; color:#2d6a4f;
+            padding:2px 12px; border-radius:20px; font-size:13px;
         }
+        .book-card .status.sold { background:#fce4e4; color:#b22222; }
 
-        /* ===== 关于我们 ===== */
+        /* 关于 */
         .about-text {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 18px;
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.06);
+            max-width:700px; margin:0 auto; font-size:16px;
         }
-        .about-text i {
-            color: #5d3a1a;
-            margin-right: 8px;
-        }
+        .about-text i { color:#5d3a1a; margin-right:6px; }
+        .about-text p { margin:10px 0; }
 
-        /* ===== 联系我们 ===== */
+        /* 联系 */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
+            background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.06);
+            max-width:900px; margin:0 auto;
         }
-        .contact-info p {
-            margin: 15px 0;
-            font-size: 17px;
-        }
-        .contact-info i {
-            width: 30px;
-            color: #5d3a1a;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
+        .contact-info p { margin:12px 0; font-size:15px; }
+        .contact-info i { width:28px; color:#5d3a1a; }
+        .contact-form input, .contact-form textarea {
+            width:100%; padding:10px 14px; margin-bottom:14px;
+            border:1px solid #ddd; border-radius:6px; font-size:15px;
+            font-family:inherit;
         }
         .contact-form button {
-            background: #5d3a1a;
-            color: #fff;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 16px;
+            background:#5d3a1a; color:#fff; border:none;
+            padding:12px 28px; border-radius:30px; font-size:16px;
+            cursor:pointer; transition:0.3s;
         }
-        .contact-form button:hover {
-            background: #3e2c1b;
-        }
+        .contact-form button:hover { background:#3e2c1b; }
 
-        /* ===== 页脚 ===== */
         footer {
-            background: #3e2c1b;
-            color: #c4b5a6;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
+            background:#3e2c1b; color:#c4b5a6;
+            text-align:center; padding:16px 0; margin-top:30px;
         }
 
-        /* ===== 响应式 ===== */
-        @media (max-width: 768px) {
+        /* 响应式 */
+        @media (max-width:768px) {
             .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: #5d3a1a;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                display:none;
+                flex-direction:column;
+                position:absolute;
+                top:70px; left:0; width:100%;
+                background:#5d3a1a;
+                box-shadow:0 5px 10px rgba(0,0,0,0.2);
             }
-            .nav-menu.active {
-                display: flex;
-            }
-            .nav-menu li {
-                margin: 0;
-                text-align: center;
-                padding: 15px 0;
-                border-bottom: 1px solid #7b5a3b;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .banner h1 {
-                font-size: 32px;
-            }
+            .nav-menu.active { display:flex; }
+            .nav-menu li { margin:0; text-align:center; padding:12px 0; border-bottom:1px solid #7b5a3b; }
+            .menu-toggle { display:block; }
+            .contact-grid { grid-template-columns:1fr; }
+            .banner h1 { font-size:32px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ===== 导航栏 ===== -->
 <header>
     <div class="container">
-        <div class="logo">
-            <a href="#home"><i class="fas fa-book-open"></i> 书香二手书</a>
-        </div>
+        <div class="logo"><a href="#home"><i class="fas fa-book-open"></i> 书香二手书</a></div>
         <nav>
             <ul class="nav-menu">
                 <li><a href="#home">首页</a></li>
                 <li><a href="#books">书库</a></li>
-                <li><a href="#publish">发布书籍</a></li>
-                <li><a href="#about">关于我们</a></li>
-                <li><a href="#contact">联系我们</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#contact">联系</a></li>
             </ul>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </nav>
     </div>
 </header>
 
-<!-- ===== 首页Banner ===== -->
+<!-- Banner -->
 <section id="home" class="banner">
     <div class="container">
         <h1><i class="fas fa-book"></i> 让知识循环</h1>
-        <p>买二手书，卖二手书，让每一本书找到新的主人</p>
+        <p>买二手书 · 卖二手书</p>
         <a href="#books" class="btn">浏览书库</a>
     </div>
 </section>
 
-<!-- ===== 书籍列表 ===== -->
+<!-- 书库 -->
 <section id="books" class="books">
     <div class="container">
         <h2 class="section-title">📖 在售好书</h2>
-        <div class="book-grid" id="bookGrid">
-            <!-- 书籍数据通过 JS 动态渲染，方便增删 -->
-        </div>
+        <div class="book-grid" id="bookGrid"></div>
     </div>
 </section>
 
-<!-- ===== 发布书籍 ===== -->
-<section id="publish" class="publish">
-    <div class="container">
-        <h2 class="section-title">📝 发布你的二手书</h2>
-        <div class="publish-form">
-            <form id="publishForm">
-                <input type="text" id="bookTitle" placeholder="书名 *" required>
-                <input type="text" id="bookAuthor" placeholder="作者 *" required>
-                <input type="number" id="bookPrice" placeholder="价格（元） *" required>
-                <select id="bookStatus">
-                    <option value="在售">在售</option>
-                    <option value="已售">已售</option>
-                </select>
-                <textarea id="bookDesc" rows="3" placeholder="书籍描述（成色、版本等）"></textarea>
-                <button type="submit">立即发布</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<!-- ===== 关于我们 ===== -->
+<!-- 关于 -->
 <section id="about" class="about">
     <div class="container">
         <h2 class="section-title">📚 关于书香</h2>
         <div class="about-text">
-            <p><i class="fas fa-leaf"></i> 书香二手书成立于2020年，致力于推动校园和社区的书籍循环利用。</p>
-            <p><i class="fas fa-handshake"></i> 我们相信每一本旧书都承载着知识，值得被更多人阅读。</p>
-            <p><i class="fas fa-recycle"></i> 平台提供免费发布、浏览、联系功能，让买卖二手书变得简单环保。</p>
+            <p><i class="fas fa-leaf"></i> 让闲置书籍流动起来，让知识继续传递。</p>
+            <p><i class="fas fa-handshake"></i> 免费浏览，买卖双方直接沟通。</p>
         </div>
     </div>
 </section>
 
-<!-- ===== 联系我们 ===== -->
+<!-- 联系 -->
 <section id="contact" class="contact">
     <div class="container">
         <h2 class="section-title">📬 联系我们</h2>
         <div class="contact-grid">
             <div class="contact-info">
-                <p><i class="fas fa-map-marker-alt"></i> 地址：北京市朝阳区书香路88号</p>
+                <p><i class="fas fa-map-marker-alt"></i> 地址：北京市朝阳区书香路</p>
                 <p><i class="fas fa-phone"></i> 电话：010-87654321</p>
-                <p><i class="fas fa-envelope"></i> 邮箱：book@xiangshu.com</p>
-                <p><i class="fas fa-clock"></i> 客服时间：周一至周日 9:00-21:00</p>
+                <p><i class="fas fa-envelope"></i> 邮箱：book@shuxiang.com</p>
+                <p><i class="fas fa-clock"></i> 客服：9:00-21:00</p>
             </div>
             <div class="contact-form">
                 <form id="contactForm">
-                    <input type="text" placeholder="您的姓名" required>
+                    <input type="text" placeholder="姓名" required>
                     <input type="email" placeholder="邮箱" required>
-                    <textarea rows="4" placeholder="留言内容" required></textarea>
+                    <textarea rows="3" placeholder="留言" required></textarea>
                     <button type="submit">发送留言</button>
                 </form>
             </div>
@@ -398,24 +240,20 @@
     </div>
 </section>
 
-<!-- ===== 页脚 ===== -->
 <footer>
     <div class="container">
-        <p>&copy; 2026 书香二手书 | 让知识循环，让阅读延续</p>
+        <p>&copy; 2026 书香二手书</p>
     </div>
 </footer>
 
-<!-- ===== JavaScript ===== -->
 <script>
-    // ----- 书籍数据（模拟数据库） -----
+    // 书籍数据
     let books = [
-        { id: 1, title: '深入理解计算机系统', author: 'Randal E. Bryant', price: 45, status: '在售', desc: 'CSAPP 第三版，几乎全新' },
-        { id: 2, title: '百年孤独', author: '加西亚·马尔克斯', price: 28, status: '在售', desc: '经典文学，有轻微笔记' },
-        { id: 3, title: '算法导论', author: 'Thomas H. Cormen', price: 60, status: '已售', desc: '原版影印，习题有解答' },
-        { id: 4, title: '人类简史', author: '尤瓦尔·赫拉利', price: 32, status: '在售', desc: '畅销书，品相良好' },
+        { id: 1, title: '深入理解计算机系统', author: 'Randal E. Bryant', price: 45, status: '在售', desc: '第三版，几乎全新' },
+        { id: 2, title: '百年孤独', author: '马尔克斯', price: 28, status: '在售', desc: '经典文学' },
+        { id: 3, title: '算法导论', author: 'Cormen', price: 60, status: '已售', desc: '原版影印' },
     ];
 
-    // 渲染书籍列表
     function renderBooks() {
         const grid = document.getElementById('bookGrid');
         grid.innerHTML = '';
@@ -429,42 +267,14 @@
                 <p class="author">${book.author}</p>
                 <p class="price">¥${book.price}</p>
                 <span class="status ${statusClass}">${book.status}</span>
-                <p style="margin-top:10px; font-size:14px; color:#7f6b5a;">${book.desc}</p>
+                <p style="margin-top:8px; font-size:13px; color:#7f6b5a;">${book.desc}</p>
             `;
             grid.appendChild(card);
         });
     }
     renderBooks();
 
-    // ----- 发布书籍 -----
-    document.getElementById('publishForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const title = document.getElementById('bookTitle').value.trim();
-        const author = document.getElementById('bookAuthor').value.trim();
-        const price = parseFloat(document.getElementById('bookPrice').value);
-        const status = document.getElementById('bookStatus').value;
-        const desc = document.getElementById('bookDesc').value.trim();
-
-        if (!title || !author || isNaN(price) || price <= 0) {
-            alert('请完整填写书名、作者和有效价格！');
-            return;
-        }
-
-        const newBook = {
-            id: Date.now(),
-            title: title,
-            author: author,
-            price: price,
-            status: status,
-            desc: desc || '暂无描述'
-        };
-        books.push(newBook);
-        renderBooks();
-        this.reset();
-        alert('🎉 书籍发布成功！已添加到书库。');
-    });
-
-    // ----- 移动端菜单切换 -----
+    // 移动端菜单
     document.querySelector('.menu-toggle').addEventListener('click', function() {
         document.querySelector('.nav-menu').classList.toggle('active');
     });
@@ -474,7 +284,7 @@
         });
     });
 
-    // ----- 平滑滚动 -----
+    // 平滑滚动
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -483,13 +293,12 @@
         });
     });
 
-    // ----- 联系表单 -----
+    // 联系表单
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('感谢您的留言，我们会尽快回复！');
+        alert('留言已发送！');
         this.reset();
     });
 </script>
-
 </body>
 </html>
